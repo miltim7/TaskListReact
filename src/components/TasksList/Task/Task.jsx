@@ -1,12 +1,25 @@
 import { useDispatch } from "react-redux";
-import { deleteTask } from "../../../redux/slices/tasksSlice";
+import { deleteTask, updateTask } from "../../../redux/slices/tasksSlice";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Task({ taskData }) {
     const dispatch = useDispatch();
+    const [isChecked, setChecked] = useState(taskData.isChecked);
+
+    function handleClick() {
+        setChecked(!isChecked);
+        dispatch(updateTask({
+            title: taskData.title,
+            id: taskData.id,
+            description: taskData.description,
+            isChecked: !isChecked,
+        }));
+    }
+
     return (
         <div>
-            <input type="checkbox" />
+            <input onClick={handleClick} type="checkbox" checked={isChecked}/>
             <Link to={`/tasks/${taskData.id}`}>{
                 <i>{taskData.title}</i>
             }</Link>
