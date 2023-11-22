@@ -40,6 +40,7 @@ function Task({ taskData }) {
             <button onClick={handleEditClick} type="submit">Edit</button>
             <button onClick={() => dispatch(deleteTask(taskData.id))}>Delete</button>
             <input type="checkbox" checked={isChecked} onClick={handleClickChecker} />
+            <br/>
 
             {
                 isEdit ? <EditTask /> : <></>
