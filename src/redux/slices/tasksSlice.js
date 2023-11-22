@@ -6,19 +6,21 @@ export const tasksSlice = createSlice({
     reducers: {
         addTask: (state, action) => {
             state.push(action.payload);
-            localStorage.setItem(JSON.stringify(state));
+            localStorage.setItem('tasks', JSON.stringify(state));
         },
         deleteTask: (state, action) => {
             const taskIndex = state.findIndex(task => task.id === action.payload);
             state.splice(taskIndex, 1);
-            localStorage.setItem(JSON.stringify(state));
+            localStorage.setItem('tasks', JSON.stringify(state));
         },
         updateTask: (state, action) => {
-            const {id, newTitle} = action.payload;
+            const { id, title, description, isChecked } = action.payload;
             const taskIndex = state.findIndex(task => task.id === id);
-            state[taskIndex].title = newTitle;
-            localStorage.setItem(JSON.stringify(state));
-        }
+            state[taskIndex].title = title;
+            state[taskIndex].description = description;
+            state[taskIndex].isChecked = isChecked;
+            localStorage.setItem('tasks', JSON.stringify(state));
+        },
     }
 });
 
